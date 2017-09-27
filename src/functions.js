@@ -2,10 +2,22 @@ function addSync(x, y) {
   return x + y
 }
 
+function multSync(x, y) {
+  return x * y
+}
+
 function addAsync(x, y) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(x + y)
+    }, 100)
+  })
+}
+
+function multAsync(x, y) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(x * y)
     }, 100)
   })
 }
@@ -19,6 +31,8 @@ function throwErrorIfNegative(x) {
 
 module.exports = {
   addSync,
+  multSync,
   addAsync,
+  multAsync,
   throwErrorIfNegative
 }

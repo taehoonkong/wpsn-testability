@@ -2,7 +2,9 @@ const assert = require('assert')
 
 const {
   addAsync,
+  multSync,
   addSync,
+  multAsync,
   throwErrorIfNegative
 } = require('../src/functions')
 
@@ -11,6 +13,13 @@ describe('functions', function () {
     it('기본 기능', function() {
       const result = addSync(1, 2)
       assert.equal(result, 3)
+    })
+  })
+  
+  describe('multSync', function(){
+    it('곱셈 기능', function() {
+      const result = multSync(2, 2)
+      assert.equal(result, 4)
     })
   })
 
@@ -36,6 +45,28 @@ describe('functions', function () {
     it('기본 기능 (async/await)', async function() {
       const result = await addAsync(1, 2)
       assert.equal(result, 3)
+    })
+  })
+
+  describe('multAsync', function() {  
+    it('곱셈 비동기 (done)', function(done) {
+      multAsync(2, 2)
+        .then(result => {
+          assert.equal(result, 4)
+          done()
+        })
+    })
+
+    it('곱셈 비동기 (Promise)', function() {
+      return multAsync(2, 2)
+        .then(result => {
+          assert.equal(result, 4)
+        })
+    })
+
+    it('곱셈 비동기 (async/await)', async function() {
+      const result = await multAsync(2, 2)
+      assert.equal(result, 4)
     })
   })
 
